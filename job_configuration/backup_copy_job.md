@@ -10,7 +10,7 @@ By default, Veeam Backup & Replication keeps 7 restore points on the target back
 
 Backup copy jobs file chains layout will depend on the repository option: "Per VM backup files" will generate one file chain per each VM, otherwise a chain will be generated per each job.
 
-If a backup copy job cannot process all requested VMs before the end of an incremental execution interval (by default 24 hours), the job will still create a backup file on the target backup repository (or multiple files if per-vm chains have been enabled), but some VMs will be left inconsistent or unprotected. This might be caused by precedence of the backup task over the backup copy task. The backup copy process will be paused and resumed during the next synchronization interval.
+If a backup copy job cannot process all requested VMs before the end of an incremental execution interval (by default 24 hours), the job will still create a backup file on the target backup repository (or multiple files if per-vm chains have been enabled), but some VMs will be left inconsistent or unprotected. This might be caused by precedence of the backup task over the backup copy task. The backup copy process will resume from the last full data transaction during the next synchronization interval.
 
 Limitations of backup copy jobs are described in Veeam Backup & Replication User Guide at <https://helpcenter.veeam.com/backup/vsphere/backup_copy_select_point.html>.
 
@@ -104,4 +104,4 @@ Usually, a backup copy is used to send data remotely. If it is necessary to send
 
 If you are using a WAN accelerated transfer, refer to the WAN Accelerator section for proper cache population procedure: <https://helpcenter.veeam.com/backup/vsphere/wan_populate_cache.html>.
 
-**Note:** Only the initial first run of a reverse incremental chain can be used with seeding (but any forward incremental chain can be used).
+**Note:** Only the initial first run of a reverse incremental chain can be used with seeding (but any forward incremental chain can be used). See [kb1856](https://www.veeam.com/kb1856) for more information.

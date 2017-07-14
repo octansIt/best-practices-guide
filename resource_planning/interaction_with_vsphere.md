@@ -272,10 +272,7 @@ processing modes and Veeam Backup from Storage Snapshots on NetApp NFS datastore
 We highly recommend you to use one of these 2 backup modes to avoid problems.
 
 In hyperconverged infrastructures (HCI), it is preferred to keep the datamover
-close the the backed up VM to avoid stressing the storage
-replication network with backup traffic. If the HCI is providing storage via
-the NFS protocol (such as Nutanix or Cisco HyperFlex), it is possible to
-force a Direct NFS data mover on the same host using the following registry key:
+close the  backed up VM to avoid stressing the storage replication network with backup traffic. If the HCI is providing storage via the NFS protocol (such as Nutanix), it is possible to force a Direct NFS data mover on the same host using the following registry key:
 
 -   Path: `HKEY_LOCAL_MACHINE\SOFTWARE\Veeam\Veeam Backup and Replication`
 -   Key: `EnableSameHostDirectNFSMode`
@@ -472,7 +469,7 @@ too aggressive, jobs may fail.
 
 ## Veeam Infrastructure cache
 
-A new service in Veeam Backup & Replication v9.5 is **Infrastructure Cache**. With it, Veeam can cache directly into memory an inventory of the objects in a vCenter or even single ESXi hierarchy. The collection is very efficient as it uses memory and it is limited to just the data needed by Veeam Backup & Replication.
+A new service in Veeam Backup & Replication v9.5 is **Infrastructure Cache** reflected as the "Veeam Broker Service" windows service. With it, Veeam can cache directly into memory an inventory of the objects in a vCenter hierarchy. The collection is very efficient as it uses memory and it is limited to just the data needed by Veeam Backup & Replication.
 
 This cache is stored into memory, so at each restart of the Veeam services its content is lost; this is not a problem as the initial retrieval of data is done as soon as the Veeam server is restarted. From here on, Veeam "subscribed" to a specific API available in vSphere, so that it can receive in "push" mode any change to the environment, without the need anymore to do a full search on the vCenter hierarchy during every operation.
 
@@ -493,11 +490,7 @@ infrastructure, you must supply credentials that the backup server will
 use to communicate with the vCenter Server.
 
 The features that Veeam provides, such as backup, restore, replication,
-and SureBackup, interact with vSphere at the fundamental level. Thus,
-certain permissions are required to take snapshots, create VMs,
-datastores, and resource groups. Because of this level of interaction,
-it is generally recommended that Veeam Backup & Replication uses an
-account with full administrative permissions.
+and SureBackup, interact with vSphere at the fundamental level. Certain permissions are required to take snapshots, create VMs, datastores, and resource groups. Because of this level of interaction, it is generally recommended that Veeam Backup & Replication uses a restricted account with the permissions that are required to complete the job.
 
 However, in some environments full administrative permissions are not
 desirable or permitted. For those environments, Veeam has identified the
